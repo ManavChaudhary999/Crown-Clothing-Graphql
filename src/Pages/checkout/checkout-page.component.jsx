@@ -1,11 +1,8 @@
 import React from "react";
-import {connect} from "react-redux";
 import "./checkout-page.styles.scss";
 
-import CheckoutItem from "../../Components/checkout-item/checkout-item.component";
+import {default as CheckoutItem} from "../../Components/checkout-item/checkout-item.container";
 import StripeButton from "../../Components/stripe-button/stripe-button.component";
-
-import {selectCartItems, selectCartTotalPrice} from "../../redux/cart/cart.selectors";
 
 const CheckoutPage = ({cartItems, total}) => {
     return(
@@ -41,9 +38,4 @@ const CheckoutPage = ({cartItems, total}) => {
     );
 };
 
-const mapStateToProps = (state) => ({
-    cartItems: selectCartItems(state),
-    total: selectCartTotalPrice(state)
-});
-
-export default connect(mapStateToProps)(CheckoutPage);
+export default CheckoutPage;

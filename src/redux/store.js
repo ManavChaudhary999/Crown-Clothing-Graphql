@@ -1,5 +1,4 @@
 import {createStore, applyMiddleware} from "redux";
-import {persistStore} from "redux-persist";
 
 import logger from "redux-logger"; // library or middelware to debug log our state
 
@@ -14,6 +13,4 @@ if(process.env.NODE_ENV === 'development')
 
 const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
-const persistor = persistStore(store);
-
-export {store, persistor};
+export default store;

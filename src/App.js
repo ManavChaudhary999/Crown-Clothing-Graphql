@@ -4,9 +4,9 @@ import {connect} from "react-redux";
 import './App.css';
 
 import ShopPage from "./Pages/shop/shop.component";
-import CheckoutPage from "./Pages/checkout/checkout-page.component";
+import {default as CheckoutPage} from "./Pages/checkout/checkout-page.container";
 
-import Header from "./Components/header/header.component";
+import {default as Header} from "./Components/header/header.container";
 import Homepage from "./Pages/homepage/homepage.component";
 import SignInSignUp from "./Pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import {auth, createUserProfileDocument} from "./Firebase/firebase.utils";

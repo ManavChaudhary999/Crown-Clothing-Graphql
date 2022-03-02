@@ -6,10 +6,9 @@ import "./header.styles.scss";
 
 import {ReactComponent as Logo} from "../../Assets/logo.svg";
 import {auth} from "../../Firebase/firebase.utils";
-import CartIcon from "../cart-icon/cart-icon.component";
-import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+import {default as CartIcon} from "../cart-icon/cart-icon.container";
+import {default as CartDropdown} from "../cart-dropdown/cart-dropdown.container";
 
-import {selectToggleCartHidden} from "../../redux/cart/cart.selectors";
 import {selectCurrentUser} from "../../redux/user/user.selectors";
 
 const Header = ({currentUser, hidden}) =>(
@@ -30,22 +29,8 @@ const Header = ({currentUser, hidden}) =>(
     </div>
 );
 
-// oldWay without reslect
-// const mapStateToProps = (state) => ({
-//     currentUser: state.user.currentUser,
-//     hidden: state.cart.hidden
-// });
-
-// New Way with reslect but without createStructuredSelector
-// const mapStateToProps = (state) => ({
-//     currentUser: selectCurrentUser(state),
-//     hidden: selectToggleCartHidden(state)
-// });
-
-// New Way with reslect with createStructuredSelector
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
-    hidden: selectToggleCartHidden
 });
 
 export default connect(mapStateToProps)(Header);

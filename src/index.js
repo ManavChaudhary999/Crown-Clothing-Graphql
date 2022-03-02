@@ -7,42 +7,55 @@ import {PersistGate} from "redux-persist/integration/react";
 import {ApolloProvider} from "react-apollo";
 import {InMemoryCache} from "apollo-cache-inmemory";
 import {createHttpLink} from "apollo-link-http";
-import {ApolloClient, gql} from "apollo-boost";
+import {ApolloClient} from "apollo-boost";
 
-import {store, persistor} from "./redux/store";
+import store from "./redux/store";
+import {typeDefs, resolvers} from "./Graphql/resolvers";
 
 import './index.css';
 import App from './App';
 
 const httpLink = createHttpLink({
     uri: 'http://crwn-clothing.com',
-    mode: 'cors'
 });
 
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
   link: httpLink,
-  cache
+  cache,
+  typeDefs,
+  resolvers
+});
+
+// Writing LocalData
+client.writeData({
+  data:{
+    cartHidden: true,
+    cartItems: [],
+    itemCount: 0,
+    cartTotal: 0
+  }
 });
 
 // Will show cors error
-client.query({
-  query: gql`
-    {
-      getCollectionsByTitle(title: "hats"){
-        id
-        title
-        items{
-          id
-          name
-          price
-          imageUrl
-        }
-      }
-    }
-  `
-}).then(res => console.log(res));
+// Just for query in normal js format
+// client.query({
+//   query: gql`
+//     {
+//       getCollectionsByTitle(title: "hats"){
+//         id
+//         title
+//         items{
+//           id
+//           name
+//           price
+//           imageUrl
+//         }
+//       }
+//     }
+//   `
+// }).then(res => console.log(res));
 
 
 ReactDOM.render(
